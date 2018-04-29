@@ -1,0 +1,41 @@
+{extend name='base'/}
+
+{block name='content'}
+	<ul class="nav nav-tabs">
+  <li role="presentation"><a href="{:url('index')}">栏目列表</a></li>
+  <li role="presentation" class="active"><a href="">栏目编辑</a></li>
+</ul>
+	
+<form class="form-horizontal" action="" method="post">
+  <div class="form-group">
+    <label for="cate_name" class="col-sm-2 control-label">栏目名称</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="cate_name" name="cate_name" value="{$oldData['cate_name']}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cate_pid" class="col-sm-2 control-label">所属栏目</label>
+    <div class="col-sm-8">
+      <select name="cate_pid" class="js-example-basic-single form-control">
+      		<option value="0">顶级栏目</option>
+      		{foreach name='cateData' item='vo'}
+      		<option {if condition="$oldData['cate_pid']==$vo['cate_id']"}selected{/if} value="{$vo['cate_id']}">{$vo['cate_name']}</option>
+      		{/foreach}
+      </select>
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="cate_sort" class="col-sm-2 control-label">栏目排序</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="cate_sort" name="cate_sort" value="{$oldData['cate_sort']}"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+    	<input type="hidden" name="cate_id" value="{:input('param.cate_id')}"/>
+      <button type="submit" class="btn btn-default">提交</button>
+    </div>
+  </div>
+</form>
+	
+{/block}

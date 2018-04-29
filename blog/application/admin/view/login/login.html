@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>个人博客后台登录</title>
+    <!-- Bootstrap core CSS -->
+    <link href="__STATIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body{
+			background-color: #f0ad4e;
+		}
+		.container{
+			width:500px;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:50px;
+			padding:20px;
+		}
+		h2{
+			color: blueviolet;
+			font-style: italic;
+		}
+	</style>
+  </head>
+
+  <body>
+
+    <div class="container">
+    	<div>
+    		<label class="col-sm-2 control-label"></label>
+			<h2>个人博客后台登录</h2>
+    	</div>
+      <form class="form-horizontal" action="" method="post">
+       <div class="form-group">
+			<label for="username" class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+			<input type="text" class="form-control" id="username" placeholder="用户名" name="admin_username">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pws" class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-10">
+			<input type="password" class="form-control" id="pws" placeholder="密码" name="admin_password">
+			</div>
+		</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10"><img src="{:captcha_src()}" alt="captcha" onclick="this.src=this.src+'?'+Math.random()"/></div> 
+        </div> 
+		<div class="form-group">
+			<label for="num" class="col-sm-2 control-label">验证码</label>
+			<div class="col-sm-10">
+			<input type="text" class="form-control" id="num" placeholder="验证码" name="code">
+			</div>
+		</div>
+		<label class="col-sm-2 control-label"></label>
+        <button class="btn btn-lg btn-success" type="submit">登录后台</button>	
+      </form>
+    </div>
+  </body>
+</html>

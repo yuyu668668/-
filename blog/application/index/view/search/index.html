@@ -1,0 +1,16 @@
+{extend name='base'/}
+
+{block name='content'}
+	<div class="col-xs-7 col-md-7">
+		<h3>检索到的文章</h3>
+		
+		{foreach name='artSeo' item='vo'}
+			<a href="{:url('index/content/index',['arc_id'=>$vo['arc_id']])}">{$vo['arc_title']}</a>
+			<p><small>浏览量：{$vo['arc_clicks']}</small></p>
+			<hr/>
+		{/foreach}
+		
+		{$artSeo->render()}
+	</div>
+	
+{/block}

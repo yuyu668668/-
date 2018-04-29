@@ -1,0 +1,64 @@
+{extend name='base'/}
+{block name='content'}
+
+	<div class="col-xs-7 col-md-7">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<div class="row">
+					<center><h2>{$headData['title']} : {$headData['name']}</h2></center>
+					<center><small>总数量：{$headData['total']}</small></center>
+				</div>
+			</li>
+			<hr />
+			{foreach name='articleData' item='vo'}
+            <li class="list-group-item">
+            	<div class="row">
+            		<div class="col-xs-5 col-md-5">
+                 		<h4><a href="{:url('index/content/index',['arc_id'=>$vo['arc_id']])}">{$vo['arc_title']}</a></h4>
+               		</div>
+               		<div class="col-xs-5 col-md-5">
+               			<i class="fa fa-sliders fa-lg"></i> 分类:
+               			<a href="{:url('index/lists/index',['cate_id'=>$vo['cate_id']])}">{$vo['cate_name']}</a>
+               		</div>
+            	</div>
+                 <div class="row">
+                     <div class="col-xs-5 col-md-5">
+                     	{if condition="$vo['pic'] neq ''"}
+                        <a href="{:url('index/content/index',['arc_id'=>$vo['arc_id']])}">
+                        	<img src="/blog/public{$vo['pic']}" height="150px" width="200px"/>
+                        </a>
+                        {else/}
+                        	暂无缩略图
+                        {/if}	
+                     </div>
+                 	 <div class="col-xs-7 col-md-7">
+                       	<p> 摘要:</p>
+                       	<small><i style="text-indent: 2em;">{$vo['arc_digest']}</i></small>
+                     </div>
+                 </div>
+                 <div class="row">
+                    <div class="col-xs-3 col-md-3"></div>
+                    <div class="col-xs-3 col-md-3"><!--标签-->
+                    	<i class="fa fa-tags fa-lg"></i>
+                    	{foreach name="vo['tags']" item='v'}
+                    		<a href="{:url('index/lists/index',['tag_id'=>$v['tag_id']])}">{$v['tag_name']}</a>
+                    	{/foreach}
+                    </div>
+                    <div class="col-xs-2 col-md-2">
+                    	<i class="fa fa-calendar fa-lg"></i>
+                    	<time><small>{:date('Y-m-d',$vo['sendtime'])}</small></time>
+                    </div>
+                    <div class="col-xs-2 col-md-2">
+                    	<i class="fa fa-mouse-pointer" aria-hidden="true"></i>浏览次数:{$vo['arc_clicks']}
+                    </div>
+                    <div class="col-xs-2 col-md-2"><a href="{:url('index/content/index',['arc_id'=>$vo['arc_id']])}">
+                    	<i class="fa fa-book fa-lg"></i>阅读全文</a>
+                    </div>
+                 </div>
+            </li>
+            <hr/>
+         	{/foreach}
+		</ul>
+	</div>
+	
+{/block}

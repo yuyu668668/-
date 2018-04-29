@@ -1,0 +1,39 @@
+{extend name="base"/}
+
+{block name='content'}
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">栏目列表</a></li>
+  <li role="presentation"><a href="{:url('store')}">栏目添加</a></li>
+</ul>
+
+<table  class="table table-striped">
+	<thead>
+	<tr>
+		<th>编号</th>
+		<th>栏目名称</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+		{foreach name='field' key='key' item='vo'}
+		<tr>
+			<td>{$vo['cate_id']}</td>
+			<td>{$vo['cate_name']}</td>
+			<td>
+				<div class="btn-group">
+					<button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">
+						操作<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right">
+    				<li><a href="{:url('addSon',['cate_id'=>$vo['cate_id']])}">添加子类</a></li>
+    				<li><a href="{:url('edit',['cate_id'=>$vo['cate_id']])}">编辑</a></li>
+    				<li role="separator" class="divider"></li>
+    				<li><a href="{:url('del',['cate_id'=>$vo['cate_id']])}" onclick="javascript:if(!confirm('确定要删除该栏目吗?')) { return false; }">删除</a></li>
+  </ul>
+				</div>
+			</td>
+		</tr>
+		{/foreach}
+	</tbody>
+</table>
+{/block}

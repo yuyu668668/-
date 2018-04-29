@@ -1,0 +1,81 @@
+{extend name='base'/}
+
+{block name='content'}
+
+
+<ul class="nav nav-tabs">
+  <li role="presentation"><a href="{:url('index')}">文章列表</a></li>
+  <li role="presentation" class="active"><a href="{:url('store')}">文章添加</a></li>
+</ul>
+	
+<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+   	<label for="arc_title" class="col-sm-2 control-label">文章标题</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="arc_title" name="arc_title">
+    </div>
+  </div>
+  <!--<div class="form-group">
+   	<label for="arc_author" class="col-sm-2 control-label">文章作者</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="arc_author" name="arc_author">
+    </div>
+  </div>-->
+   <div class="form-group">
+   	<label for="arc_sort" class="col-sm-2 control-label">文章排序</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="arc_sort" name="arc_sort">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cate_id" class="col-sm-2 control-label">所属分类</label>
+    <div class="col-sm-8">
+      <select name="cate_id" class="js-example-basic-single form-control">
+      		<option value="0">请选择分类</option>
+      		{foreach name='cateData' item='vo'}
+      		<option value="{$vo['cate_id']}">{$vo['cate_name']}</option>
+      		{/foreach}
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="tag_name" class="col-sm-2 control-label">文章标签</label>
+    <div class="col-sm-8">
+    		{foreach name='tagData' item='vo'}
+    		<label class="checkbox-inline">
+      		<input type="checkbox" name="tag[]" value="{$vo['tag_id']}">{$vo['tag_name']}
+      	</label>
+      	{/foreach}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="pic" class="col-sm-2 control-label">文章缩略图</label>
+    <div class="col-sm-8">
+      <input type="file" class="form-control" id="pic" name="pic"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="arc_digest" class="col-sm-2 control-label">文章摘要</label>
+    <div class="col-sm-8">
+      <textarea class="form-control" id="arc_digest" name="arc_digest"></textarea>
+    </div>
+  </div>
+    <div class="form-group">
+   		<label for="arc_content" class="col-sm-2 control-label">文章内容</label>
+   		<div class="col-sm-8">
+     		 <textarea id="arc_content" name="arc_content" rows="">
+      	
+      		</textarea>
+    	</div>
+  </div>
+  <input type="hidden" name="arc_id" id="arc_id"/>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <button type="submit" class="btn btn-default">提交</button>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+	UE.getEditor('arc_content',{initialFrameWidth:746,initialFrameHeight:300});
+</script>
+{/block}

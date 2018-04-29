@@ -1,0 +1,46 @@
+{extend name='base'/}
+
+{block name='content'}
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">日志列表</a></li>
+  <li role="presentation"><a href="{:url('admin/note/store')}">日志添加</a></li>
+</ul>
+
+<table  class="table table-striped">
+	<thead>
+	<tr>
+		<th>编号</th>
+		<th>日志内容</th>
+		<th>发布时间</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+		{foreach name='field' item='vo'}
+		<tr>
+			<td>{$vo['note_id']}</td>
+			<td>{$vo['note_content']}</td>
+			<td>{:date('Y-m-d',$vo['note_time'])}</td>
+			<td>
+				<div class="btn-group">
+					<button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">
+						操作<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right">
+	    				<li><a href="{:url('admin/note/store',['note_id'=>$vo['note_id']])}">编辑</a></li>
+	    				<li role="separator" class="divider"></li>
+	    				<li><a href="{:url('admin/note/del',['note_id'=>$vo['note_id']])}" onclick="javascript:if(!confirm('确定要删除该日志吗?')) { return false; }">删除</a></li>
+  					</ul>
+				</div>
+			</td>
+		</tr>
+		{/foreach}
+	</tbody>
+</table>
+	{$field->render()}
+{/block}
+
+
+
+

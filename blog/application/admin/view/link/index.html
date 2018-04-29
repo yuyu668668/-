@@ -1,0 +1,43 @@
+{extend name='base'/}
+
+{block name='content'}
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">友链列表</a></li>
+  <li role="presentation"><a href="{:url('admin/link/store')}">友链添加</a></li>
+</ul>
+
+<table  class="table table-striped">
+	<thead>
+	<tr>
+		<th>编号</th>
+		<th>友链名称</th>
+		<th>友链地址</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+		{foreach name='field' item='vo'}
+		<tr>
+			<td>{$vo['link_id']}</td>
+			<td>{$vo['link_name']}</td>
+			<td><a target="_blank" href="{$vo['link_url']}">{$vo['link_url']}</a></td>
+			<td>
+				<div class="btn-group">
+					<button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">
+						操作<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right">
+	    				<li><a href="{:url('admin/link/store',['link_id'=>$vo['link_id']])}">编辑</a></li>
+	    				<li role="separator" class="divider"></li>
+	    				<li><a href="{:url('admin/link/del',['link_id'=>$vo['link_id']])}" onclick="javascript:if(!confirm('确定要删除该链接吗?')) { return false; }">删除</a></li>
+  					</ul>
+				</div>
+			</td>
+		</tr>
+		{/foreach}
+	</tbody>
+</table>
+	{$field->render()}
+{/block}
+

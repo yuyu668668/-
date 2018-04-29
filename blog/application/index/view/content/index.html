@@ -1,0 +1,59 @@
+{extend name='base'/}
+{block name='content'}
+	<div class="col-xs-7 col-md-7">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<center><h3>{$arcContent['arc_title']}</h3></center>
+				<center><small>{:date('Y-m-d',$arcContent['sendtime'])}</small></center>
+				<hr />
+				<div style="height: 500px;overflow: auto;">
+					<p>
+						{$arcContent['arc_content']}    <!--文章内容-->
+					</p>
+				</div>
+				<hr />
+				<center>
+					<i class="fa fa-tags fa-lg"></i>
+					{foreach name="arcContent['tags']" item='vo'}
+					<a href="{:url('index/lists/index',['tag_id'=>$vo['tag_id']])}"><small>{$vo['tag_name']}</small></a>
+					{/foreach}
+				</center>
+			</li>
+			<hr />
+			{if condition="$pre eq ''"}
+			<a href="javascript:void(0)">上一篇没有了</a>
+			{else/}
+			<i class="fa fa-angle-double-left fa-lg"></i>
+			<a href="{:url('index/content/index',['arc_id'=>$pre])}">上一篇</a>&nbsp;&nbsp;
+			{/if}
+			{if condition="$next eq ''"}
+			<a href="javascript:void(0)">下一篇没有了</a>
+			{else/}
+			<a href="{:url('index/content/index',['arc_id'=>$next])}">下一篇</a>
+			<i class="fa fa-angle-double-right fa-lg"></i>
+			{/if}
+		<hr/>
+		<li class="list-group-item">
+			评论
+			<form action="{:url('index/chat/store',['arc_id'=>$arcContent['arc_id']])}" method="post">
+				<input type="text" name="chat_name" placeholder="评论者"/><br /><br />
+				<textarea rows="2" cols="50" name="chat_content" placeholder="评论内容"></textarea><br />
+				
+				<input type="hidden" name="arc_id" value="{$arcContent['arc_id']}" />
+				<input type="submit" value="发布评论" />			
+			</form>
+		</li>
+		<li class="list-group-item">
+			评论列表
+			{foreach name='chatData' item='vo'}
+			<li class="list-group-item">
+				评论用户:{$vo['chat_name']}<br/>
+				评论时间：{:date('Y-m-d',$vo['chat_time'])}<br/>
+				评论内容：{$vo['chat_content']}
+			</li>
+			{/foreach}
+			{$chatData->render()}
+		</li>
+		</ul>
+	</div>
+{/block}

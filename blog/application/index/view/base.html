@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客</title>
+    <link rel="stylesheet" href="__STATIC__/index/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/index/font-awesome/css/font-awesome.min.css" />
+    <script type="text/javascript" src="__STATIC__/index/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/index/js/bootstrap.min.js"></script>
+    <!--实现3D标签云-->
+    <script type="text/javascript" src="__STATIC__/index/js/tags.js"></script>
+	<link rel="stylesheet" href="__STATIC__/index/css/tags.css" />
+	<style>
+		body{
+			background-color: #F1F1F1;
+		}
+	</style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+        	<div class="col-xs-1 col-md-1"></div>
+           <div class="col-xs-10 col-md-10">
+            <div class="page-header">
+                <h1>飞云's博客 <small>Welcome to yuyu668668's Blog</small></h1>
+            </div>
+            </div>
+            <div class="col-xs-1 col-md-1"></div>
+        </div>
+        <!-- 导航栏 -->
+        <div class="row">
+            <div class="col-xs-1 col-md-1"></div>
+            <div class="col-xs-10 col-md-10">
+                <nav class="navbar navbar-default navbar-fixed">
+                    <div class="container">
+                        <ul class="nav nav-pills">
+                            <li {if condition="input('param.cate_id')==''"}class="active"{/if}>
+                            	<a href="{:url('index/index/index')}">首页</a>
+                            </li>
+                            {foreach name='cateData' item='vo'}
+                            <li {if condition="input('param.cate_id')==$vo['cate_id']"}class="active"{/if}>
+                            	<a href="{:url('index/lists/index',['cate_id'=>$vo['cate_id']])}">{$vo['cate_name']}</a>
+                            </li>
+                          	{/foreach}
+                          	<li>
+                            	<a href="{:url('index/index/note')}">日志</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-xs-1 col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1 col-md-1"></div>
+            <!--屏幕左侧空一格-->
+            <!--左侧文章内容-->
+            {block name='content'}{/block}
+            <!-- 右侧栏目 -->
+            <div class="col-xs-3 col-md-3">
+                <div class="row">
+                    <ul class="list-group">
+                    	 <li class="list-group-item">
+                            <h3><i class="fa fa-search fa-lg"></i>文章搜索</h3>
+                            <form action="{:url('index/Search/index')}" method="post">
+                            	<input type="text" name="search"/>
+                            	<input type="submit" value="search"/>
+                            </form>
+                        </li>
+                         <hr/>
+                        <li class="list-group-item">
+                            <h3><i class="fa fa-envira fa-lg"></i>热门标签</h3>
+                            <div id="tagsList">
+                                {foreach name='tagData' item='vo'}
+                            	<a href="{:url('index/lists/index',['tag_id'=>$vo['tag_id']])}">{$vo['tag_name']}</a>
+                            	{/foreach}
+                            </div>
+                        </li>
+                         <hr/>
+                        <li class="list-group-item">
+                            <h3><i class="fa fa-flag fa-lg"></i>分类列表</h3>
+                            {foreach name='allCateData' item='vo'}
+                            <a href="{:url('index/lists/index',['cate_id'=>$vo['cate_id']])}">{$vo['cate_name']}</a>
+                            {/foreach}
+                        </li>
+                        <hr/>
+                        <li class="list-group-item">
+                            <h3><i class="fa fa-heart-o fa-lg"></i>最新文章</h3>
+                            {foreach name='articleData' item='vo'}
+                           	<div class="row">
+                           		<div class="col-xs-7 col-md-7"><a href="{:url('index/content/index',['arc_id'=>$vo['arc_id']])}">{$vo['arc_title']}</a></div>
+                           		<div class="col-xs-5 col-md-5"><time><small>{:date('Y-m-d',$vo['sendtime'])}</small></time></div>
+                           	</div>
+                           	{/foreach}
+                        </li>
+                        <hr/>
+                        <li class="list-group-item">
+                            <h3><i class="fa fa-fire fa-lg"></i>热门文章</h3>
+                            {foreach name='articleHot' item='vo'}
+                           	<div class="row">
+                           		<div class="col-xs-7 col-md-7"><a href="{:url('index/content/index',['arc_id'=>$vo['arc_id']])}">{$vo['arc_title']}</a></div>                  
+                           	</div>
+                           	{/foreach}
+                        </li>
+                        <hr/>
+                        <li class="list-group-item">
+                            <h3><i class="fa fa-link fa-lg"></i>友情链接</h3>
+                            {foreach name='linkData' item='vo'}
+                            <p><a href="{$vo['link_url']}">{$vo['link_name']}</a></p>
+                            {/foreach}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-1 col-md-1"></div>
+            <!--屏幕右侧空一格-->
+        </div>
+        <!--底部-->
+        <div class="row">
+            <hr/>
+            <div class="col-xs-12 col-md-12">             
+                <div style="height: 100px;line-height: 100px;text-align: center;">
+                    Copyright &copy;2017 , All Rights Reserved yuyu版权所有
+				</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

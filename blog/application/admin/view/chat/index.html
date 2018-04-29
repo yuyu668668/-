@@ -1,0 +1,32 @@
+{extend name='base'/}
+
+{block name='content'}
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">评论列表</a></li>
+</ul>
+
+<table  class="table table-striped">
+	<thead>
+	<tr>
+		<th>编号</th>
+		<th>评论者</th>
+		<th>所评论文章</th>
+		<th>评论内容</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+		{foreach name='chatData' item='vo'}
+		<tr>
+			<td>{$vo['chat_id']}</td>
+			<td>{$vo['chat_name']}</td>
+			<td>{$vo['arc_title']}</td>
+			<td>{$vo['chat_content']}</td>
+			<td><a href="{:url('admin/chat/del',['chat_id'=>$vo['chat_id']])}">[删除]</a></td>
+		</tr>
+		{/foreach}
+	</tbody>
+</table>
+{$chatData->render()}
+{/block}
